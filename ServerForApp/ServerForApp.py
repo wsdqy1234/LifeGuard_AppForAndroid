@@ -21,6 +21,7 @@ def sock_client_image():
         fp = open('TestImage/'+str(i)+'.png', 'rb')  # open the photo for transportation
         while True:
             data = fp.read(1024)  # read data from the photo
+            if not data:
                 break
             sock.send(data)  # sending data through BYTE form
         sock.close()

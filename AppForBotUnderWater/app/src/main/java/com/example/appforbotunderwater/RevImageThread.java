@@ -2,32 +2,28 @@ package com.example.appforbotunderwater;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.ArrayList;
+
 
 
 public class RevImageThread implements Runnable{ //多线程实现网络连接，创建socket，关闭socket
-    final int SleepTime = 10; //线程的睡眠时间，单位ms
+    final int SleepTime = 5; //线程的睡眠时间，单位ms
     private String ip; //ip地址
     private int port; //端口
-    android.os.Handler mainHandler;//线程间传输数据的handler，用于主activity接收子线程数据后更新UI
+    Handler mainHandler;//对应主线程中的videoHandler
     Socket s; //socket
     Bitmap bitmap;
     private static final int COMPLETED = 0X111; //数据传输成功的标志
 
 
     /*构造函数，用于初始化ip,端口,handler*/
-    public RevImageThread(String ip,int port,android.os.Handler mainHandler){
+    public RevImageThread(String ip,int port,Handler mainHandler){
         this.ip = ip;
         this.port = port;
         this.mainHandler = mainHandler;
@@ -45,7 +41,7 @@ public class RevImageThread implements Runnable{ //多线程实现网络连接�
     /*关闭socket*/
     void close(){
         try{
-            s.close();
+            if(s != null) s.close();
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -57,8 +53,9 @@ public class RevImageThread implements Runnable{ //多线程实现网络连接�
         byte [] buffer = new byte[1024];
         int len = 0;
 
-        //创建socket
-        open();
+        while(s == null){//直到连接为止
+            open();
+        }
 
         while(true){
             try{
@@ -70,7 +67,7 @@ public class RevImageThread implements Runnable{ //多线程实现网络连接�
             }
             if(!s.isClosed() && s.isConnected() && !s.isInputShutdown()){
                 try{
-                    Log.i("mr","连接成功，等待接收信息");
+                    Log.i("mr","视频thread连接成功");
 
                     InputStream ins = s.getInputStream(); //输入流,获取socket的输入
                     ByteArrayOutputStream outStream = new ByteArrayOutputStream();//输出流

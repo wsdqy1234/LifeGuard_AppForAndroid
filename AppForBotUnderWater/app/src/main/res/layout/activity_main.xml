@@ -6,13 +6,239 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
 
+    <EditText
+        android:id="@+id/PortText2"
+        android:layout_width="87dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Image"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/PortText"
+        android:ems="10"
+        android:hint="指令port"
+        android:inputType="textPersonName" />
+
     <ImageView
         android:id="@+id/Image"
         android:layout_width="match_parent"
         android:layout_height="266dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:scaleType="fitXY"
         app:srcCompat="@android:color/background_dark" />
+
+    <EditText
+        android:id="@+id/IpText"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Image"
+        android:layout_marginTop="0dp"
+        android:ems="10"
+        android:hint="Ip Address"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/PortText"
+        android:layout_width="78dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Image"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/IpText"
+        android:ems="10"
+        android:hint="视频port"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/IpButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Image"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-4dp"
+        android:layout_marginEnd="1dp"
+        android:onClick="IpButton_Click"
+        android:text="连接"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/Text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/IpText"
+        android:layout_alignStart="@+id/IpText"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:text="开启自动控制模式"
+        android:textAlignment="viewStart"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <Switch
+        android:id="@+id/AutoSwitch"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/IpButton"
+        android:layout_marginStart="-3dp"
+        android:layout_marginTop="-10dp"
+        android:layout_toEndOf="@+id/Text1"
+        android:textColorLink="@color/colorPrimary" />
+
+    <Button
+        android:id="@+id/StillButton"
+        android:layout_width="65dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/PortText"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="-6dp"
+        android:layout_toEndOf="@+id/AutoSwitch"
+        android:onClick="StillButton_Click"
+        android:text="急停"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/HomeButton"
+        android:layout_width="65dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/PortText2"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="-6dp"
+        android:layout_toEndOf="@+id/StillButton"
+        android:onClick="HomeButton_Click"
+        android:text="归位"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold" />
+
+    <com.example.rockerview.JoystickView
+        android:id="@+id/joystickView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Text1"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/RiseButton"
+        android:layout_width="107dp"
+        android:layout_height="62dp"
+        android:layout_below="@+id/StillButton"
+        android:layout_marginStart="79dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/joystickView"
+        android:onClick="RiseButton_Click"
+        android:text="设备上升"
+        android:textColor="@color/stick_default_color"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/DiveButton"
+        android:layout_width="107dp"
+        android:layout_height="62dp"
+        android:layout_below="@+id/RiseButton"
+        android:layout_marginStart="79dp"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@+id/joystickView"
+        android:onClick="DiveButton_Click"
+        android:text="设备潜入"
+        android:textColor="@color/stick_default_color"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/DeviceTitle"
+        android:layout_width="410dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/joystickView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="3dp"
+        android:text="【设备控制指令】"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/CameraButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/DeviceTitle"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="-1dp"
+        android:onClick="CameraButton_Click"
+        android:text="打开摄像头"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/AirButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/DeviceTitle"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="0dp"
+        android:onClick="AirButton_Click"
+        android:text="打开气囊"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/CmLightButton"
+        android:layout_width="107dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/AirButton"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="-2dp"
+        android:layout_toEndOf="@+id/AirButton"
+        android:onClick="CmLightButton_Click"
+        android:text="打开正常灯"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/SosLightButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/CameraButton"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="6dp"
+        android:onClick="SosLightButton_Click"
+        android:text="打开救援灯"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/PumpButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/AirButton"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="5dp"
+        android:onClick="PumpButton_Click"
+        android:text="打开水泵"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/CloseButton"
+        android:layout_width="122dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/CmLightButton"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="278dp"
+        android:layout_marginTop="7dp"
+        android:onClick="CloseButton_Click"
+        android:text="关闭所有设备"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold" />
 
 </RelativeLayout>
